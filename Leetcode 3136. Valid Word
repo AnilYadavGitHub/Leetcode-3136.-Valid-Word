@@ -1,0 +1,61 @@
+class Solution {
+public:
+    bool isValid(string word) {
+
+        if(word.size() < 3){
+            return false;
+        }
+        bool flag1 = false;
+        bool flag2 = false;
+        
+        unordered_set<char>mp1 , mp2;
+
+
+        mp1.insert('a');
+        mp1.insert('A');
+
+        mp1.insert('e');
+        mp1.insert('E');
+
+        mp1.insert('i');
+        mp1.insert('I');
+
+        mp1.insert('o');
+        mp1.insert('O');
+
+        mp1.insert('u');
+        mp1.insert('U');
+
+
+        for(int ch = 'a' ; ch <= 'z' ; ch++){
+            
+            if(mp1.find(ch) == mp1.end()){
+                mp2.insert(ch);
+            }
+        }
+
+
+        for(int ch = 'A' ; ch <= 'Z' ; ch++){
+            
+            if(mp1.find(ch) == mp1.end()){
+                mp2.insert(ch);
+            }
+        }
+        int c1 = 0;
+        for(char ch : word){
+
+            if(ch >= '0' && ch <= '9'){
+                c1++;
+            }else if(mp1.find(ch) != mp1.end()){
+                flag1 = true;
+            }else if(mp2.find(ch) != mp2.end()){
+                flag2 = true;
+            }else{
+                return false;
+            }
+        }   
+
+
+        return (flag1 && flag2);
+    }
+};
